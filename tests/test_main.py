@@ -10,9 +10,9 @@ load_dotenv(dotenv_path='.env.test')
 @pytest.fixture(autouse=True)
 def setup_scrimmage():
     Scrimmage.init_rewarder(
-        api_server_endpoint=os.getenv('API_SERVER_ENDPOINT'),
-        private_key=os.getenv('PRIVATE_KEY'),
-        namespace=os.getenv('NAMESPACE'),
+        api_server_endpoint=os.getenv('SCRIMMAGE_API_SERVER_ENDPOINT'),
+        private_key=os.getenv('SCRIMMAGE_PRIVATE_KEY'),
+        namespace=os.getenv('SCRIMMAGE_NAMESPACE'),
     )
 
 

@@ -14,6 +14,11 @@ class Scrimmage:
     user: UserService = None
     reward: RewardService = None
 
+    def __init__(self, container: Container, user: UserService, reward: RewardService):
+        self._container = container
+        self.user = user
+        self.reward = reward
+
     @staticmethod
     def create_rewarder(api_server_endpoint: str,
                         namespace: str,
@@ -32,7 +37,8 @@ class Scrimmage:
             secure=secure,
             validate_api_server_endpoint=validate_api_server_endpoint
         )
-        return create_scrimmage_instance(config)
+        container, user, reward = create_scrimmage_instance(config)
+        return Scrimmage(container, user, reward)
 
     @staticmethod
     def init_rewarder(api_server_endpoint: str,
