@@ -1,11 +1,13 @@
-from create import create_scrimmage_instance
-from schema import RewarderConfig, ILogger, LogLevel
-from components import UserService, RewardService
-from container import Container
-from typing import Optional
 import logging
+from typing import Optional
+
+from scrimmage_sdk.components import RewardService, UserService
+from scrimmage_sdk.container import Container
+from scrimmage_sdk.create import create_scrimmage_instance
+from scrimmage_sdk.schema import ILogger, LogLevel, RewarderConfig
 
 default_logger = logging.getLogger("scrimmage-sdk")
+
 
 class Scrimmage:
     _container: Container = None

@@ -1,7 +1,10 @@
-from pydantic import BaseModel
-from typing import Optional
-from . import LogLevel
 from logging import Logger
+from typing import Optional
+
+from pydantic import BaseModel
+
+from scrimmage_sdk.schema import LogLevel
+
 
 class RewarderConfig(BaseModel):
     model_config = {
@@ -15,6 +18,7 @@ class RewarderConfig(BaseModel):
     logger: Optional[Logger] = None
     secure: Optional[bool] = True
     validate_api_server_endpoint: Optional[bool] = True
+
 
 class PartialRewarderConfig(BaseModel):
     model_config = {

@@ -1,11 +1,12 @@
-from schema import RewarderConfig
-from container import Container
+from scrimmage_sdk.container import Container
+from scrimmage_sdk.schema import RewarderConfig
+
 
 def create_scrimmage_instance(config: RewarderConfig):
     # Initialize container with all services
     container = Container()
     container.init_resources()
-    
+
     # Initialize the ConfigService
     config_service = container.config_service()
     config_service.set_config(config)

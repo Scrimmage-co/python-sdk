@@ -1,7 +1,7 @@
 import os
 import pytest
 from dotenv import load_dotenv
-from scrimmage import Scrimmage
+from scrimmage_sdk import Scrimmage
 
 # Load environment variables from .env.test
 load_dotenv(dotenv_path='.env.test')

@@ -1,9 +1,12 @@
-from schema import ScrimmageAPIService, PartialRewarderConfig, PrivateKey, BaseService
-from typing import Dict, List, Optional
 import logging
 import re
+from typing import Dict, List, Optional
+
+from scrimmage_sdk.schema import (BaseService, PartialRewarderConfig,
+                                  PrivateKey, ScrimmageAPIService)
 
 logger = logging.getLogger('scrimmage')
+
 
 class InternalRewarderConfig(PartialRewarderConfig):
     services: Dict[ScrimmageAPIService, str] = {}
@@ -31,14 +34,14 @@ class ConfigService(BaseService):
         api_server_endpoint = config.api_server_endpoint
         if not api_server_endpoint:
             raise Exception('api_server_endpoint is required')
-        
+
         self.validate_protocol(api_server_endpoint, config.secure)
-        
+
         api_endpoint = api_server_endpoint
         if api_endpoint[-1] == '/':
             # Remove trailing slash if present
             api_endpoint = api_endpoint[:-1]
-        
+
         # Create dictionaries from the models
         default_config = defaultRewarderConfig.model_dump()
         config_dict = config.model_dump()
@@ -57,31 +60,31 @@ class ConfigService(BaseService):
 
     def is_configured(self) -> bool:
         return self._rewarder_config is not None
-    
+
     def get_config_or_throw(self) -> InternalRewarderConfig:
         if self.is_configured():
             return self._rewarder_config
         else:
             raise Exception('Rewarder not initiated')
-    
+
     def get_private_key_or_throw(self, alias: str = 'default') -> str:
         config = self.get_config_or_throw()
         for private_key in config.private_keys:
             if private_key.alias == alias:
                 return private_key.value
-        
+
         raise Exception(f'Private key {alias} not found')
-    
+
     def get_service_url(self, service: ScrimmageAPIService) -> str:
         config = self.get_config_or_throw()
-        
+
         return f"{config.api_server_endpoint}/{service}"
-    
+
     def get_namespace_or_throw(self) -> str:
         config = self.get_config_or_throw()
 
         return config.namespace
-    
+
     def validate_protocol(self, protocol: str, secure: bool):
         protocolRegex = r'^^https:\/\/.+' if secure else r'^https?:\/\/.+'
 

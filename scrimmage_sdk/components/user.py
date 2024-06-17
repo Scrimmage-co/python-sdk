@@ -1,5 +1,5 @@
-from components import APIService
-from schema import BaseService
+from scrimmage_sdk.components import APIService
+from scrimmage_sdk.schema import BaseService
 from typing import List, Dict, Any
 
 class UserService(BaseService):

@@ -1,13 +1,15 @@
-from components import ConfigService
-from schema import BaseService, LogLevel
 from typing import Dict
 
+from scrimmage_sdk.components import ConfigService
+from scrimmage_sdk.schema import BaseService, LogLevel
+
 log_level_order: Dict[LogLevel, int] = {
-  'debug': 0,
-  'info': 1,
-  'warn': 2,
-  'error': 3,
+    'debug': 0,
+    'info': 1,
+    'warn': 2,
+    'error': 3,
 }
+
 
 class LoggerService(BaseService):
     def __init__(self, config_service: ConfigService):

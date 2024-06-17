@@ -1,7 +1,9 @@
+from typing import Any, Dict, List, Union
+
 import requests
-from components import ConfigService
-from schema import BaseService, ScrimmageAPIService
-from typing import Union, List, Dict, Any
+
+from scrimmage_sdk.components import ConfigService
+from scrimmage_sdk.schema import BaseService, ScrimmageAPIService
 
 
 class APIService(BaseService):
@@ -64,7 +66,7 @@ class APIService(BaseService):
 
     def get_service_status(self, service: ScrimmageAPIService):
         url = f"{self.config_service.get_service_url(service)}/system/status"
-        
+
         try:
             response = requests.get(url)
 

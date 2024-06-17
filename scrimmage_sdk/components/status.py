@@ -1,5 +1,5 @@
-from components import ConfigService, APIService
-from schema import BaseService
+from scrimmage_sdk.components import ConfigService, APIService
+from scrimmage_sdk.schema import BaseService
 
 class StatusService(BaseService):
     def __init__(self, config_service: ConfigService, api_service: APIService):

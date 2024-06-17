@@ -1,4 +1,4 @@
-from typing import Literal, Any
+from typing import Any, Literal
 
 LogLevel = Literal['debug', 'info', 'log', 'warn', 'error']
 
