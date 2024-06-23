@@ -14,23 +14,102 @@ Tutorial can be found at [Scrimmage Rewards Tutorial](https://scrimmage-rewards.
 (This PyPi package is not currently available, but will be available soon)
 
 ### Configuration
-    from scrimmage_sdk import Scrimmage
+```python
+from scrimmage_sdk import Scrimmage
 
-    Scrimmage.init_rewarder(
-        api_server_endpoint="YOUR_SCRIMMAGE_API_SERVER_ENDPOINT",
-        private_key="YOUR_SCRIMMAGE_PRIVATE_KEY",
-        namespace="YOUR_SCRIMMAGE_NAMESPACE",
-    )
+Scrimmage.init_rewarder(
+    api_server_endpoint="YOUR_SCRIMMAGE_API_SERVER_ENDPOINT",
+    private_key="YOUR_SCRIMMAGE_PRIVATE_KEY",
+    namespace="YOUR_SCRIMMAGE_NAMESPACE",
+)
+```
 
 ### Usage
 
 #### Get user token
-    from scrimmage_sdk import Scrimmage
+```python
+from scrimmage_sdk import Scrimmage
 
-    token = Scrimmage.get_user_token("unique-user-id")
+# Configure Scrimmage...
+
+token = Scrimmage.get_user_token("unique-user-id")
+```
 
 #### Track rewardable for a user
-    from scrimmage_sdk import Scrimmage
+```python
+from scrimmage_sdk import Scrimmage
+
+# Configure Scrimmage...
+
+user_id = 'nanachi'
+data_type = 'helloWorld'
+rewards = [{
+    'amount': 10,
+    'currency': 'USD'
+}]
+response = Scrimmage.reward.track_rewardable(user_id, data_type, rewards=rewards)
+```
+
+#### Track rewardable for a user only once (with idempotency key)
+```python
+from scrimmage_sdk import Scrimmage
+
+# Configure Scrimmage...
+
+user_id = 'nanachi'
+data_type = 'helloWorld'
+idempotency_key = 'idempotency_key_12345'
+reward = {
+    'amount': 10,
+    'currency': 'USD'
+}
+response = Scrimmage.reward.track_rewardable_once(user_id, data_type, idempotency_key, reward=reward)
+
+```
+
+#### Using multiple Scrimmage instances at once
+```python
+from scrimmage_sdk import Scrimmage
+
+# Configure Scrimmage...
+
+# Using multiple Scrimmage instances at once
+scrimmage1 = Scrimmage.create_rewarder(
+    api_server_endpoint=os.getenv('SCRIMMAGE_API_SERVER_ENDPOINT_1'),
+    private_key=os.getenv('SCRIMMAGE_PRIVATE_KEY_1'),
+    namespace=os.getenv('SCRIMMAGE_NAMESPACE_1'),
+)
+scrimmage1.user.get_user_token(...)
+scrimmage1.reward.track_rewardable(...)
+
+scrimmage2 = Scrimmage.create_rewarder(
+    api_server_endpoint=os.getenv('SCRIMMAGE_API_SERVER_ENDPOINT_2'),
+    private_key=os.getenv('SCRIMMAGE_PRIVATE_KEY_2'),
+    namespace=os.getenv('SCRIMMAGE_NAMESPACE_2'),
+)
+scrimmage2.user.get_user_token(...)
+scrimmage2.reward.track_rewardable(...)
+```
+
+### Async Usage
+To use the SDK in an async environment, you can append _async to the functions to use the async version of the function.
+
+```python
+import asyncio
+
+from scrimmage_sdk import Scrimmage
+
+# Configure Scrimmage
+Scrimmage.init_rewarder(
+    api_server_endpoint="YOUR_SCRIMMAGE_API_SERVER_ENDPOINT",
+    private_key="YOUR_SCRIMMAGE_PRIVATE_KEY",
+    namespace="YOUR_SCRIMMAGE_NAMESPACE",
+)
+
+# Async usage
+async def main():
+    token = await Scrimmage.get_user_token_async("unique-user-id")
+    print(token)
 
     user_id = 'nanachi'
     data_type = 'helloWorld'
@@ -38,11 +117,22 @@ Tutorial can be found at [Scrimmage Rewards Tutorial](https://scrimmage-rewards.
         'amount': 10,
         'currency': 'USD'
     }]
-    response = Scrimmage.reward.track_rewardable(user_id, data_type, rewards=rewards)
+    response = await Scrimmage.reward.track_rewardable_async(user_id, data_type, rewards=rewards)
+    print(response)
 
-#### Track rewardable for a user only once (with idempotency key)
+    user_id = 'nanachi'
+    data_type = 'helloWorld'
+    idempotency_key = 'idempotency_key_12345'
+    reward = {
+        'amount': 10,
+        'currency': 'USD'
+    }
+    response = await Scrimmage.reward.track_rewardable_once_async(user_id, data_type, idempotency_key, reward=reward)
+    print(response)
 
-#### Using multiple Scrimmage instances at once
+asyncio.run(main())
+```
+
 
 ### Examples
 See the [examples](https://github.com/Scrimmage-co/python-sdk/tree/main/examples) folder for different use cases.
