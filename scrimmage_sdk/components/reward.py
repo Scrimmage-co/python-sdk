@@ -18,5 +18,18 @@ class RewardService(BaseService):
 
         return results
 
+    async def track_rewardable_async(self, user_id: str, data_type: str, rewards: List[Any]):
+        results = []
+        for reward in rewards:
+            results.append(
+                await self.api_service.create_integration_reward_async(
+                    user_id, data_type, reward)
+            )
+
+        return results
+
     def track_rewardable_once(self, user_id: str, data_type: str, unique_id: str, reward: Any = None):
         return self.api_service.create_integration_reward(user_id, data_type, unique_id, reward)
+
+    async def track_rewardable_once_async(self, user_id: str, data_type: str, unique_id: str, reward: Any = None):
+        return await self.api_service.create_integration_reward_async(user_id, data_type, unique_id, reward)

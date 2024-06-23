@@ -2,8 +2,10 @@ from scrimmage_sdk import Scrimmage
 from dotenv import load_dotenv
 import os
 
+
 # Load environment variables
 load_dotenv()
+
 
 # Initialize Scrimmage
 Scrimmage.init_rewarder(
@@ -12,20 +14,31 @@ Scrimmage.init_rewarder(
     namespace=os.getenv('SCRIMMAGE_NAMESPACE'),
 )
 
+
 # Get user token
-token = Scrimmage.user.get_user_token('nanachi')
+user_id = 'nanachi'
+token = Scrimmage.user.get_user_token(user_id)
+
 
 # Track rewardable for a user
-response = Scrimmage.reward.track_rewardable('nanachi', 'helloWorld', {
+user_id = 'nanachi'
+data_type = 'helloWorld'
+rewards = [{
     'amount': 10,
     'currency': 'USD'
-})
+}]
+response = Scrimmage.reward.track_rewardable(user_id, data_type, rewards=rewards)
+
 
 # Track rewardable for a user only once (with idempotency key)
-response = Scrimmage.reward.track_rewardable_once('nanachi', 'helloWorld', 'idempotency_key_12345', {
+user_id = 'nanachi'
+data_type = 'helloWorld'
+idempotency_key = 'idempotency_key_12345'
+reward = {
     'amount': 10,
     'currency': 'USD'
-})
+}
+response = Scrimmage.reward.track_rewardable_once(user_id, data_type, idempotency_key, reward=reward)
 
 
 # Using multiple Scrimmage instances at once

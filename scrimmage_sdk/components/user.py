@@ -8,3 +8,6 @@ class UserService(BaseService):
 
     def get_user_token(self, user_id: str, tags: List[str] = [], properties: Dict[str, Any] = {}):
         return self.api_service.get_user_token(user_id, tags=tags, properties=properties)
+    
+    async def get_user_token_async(self, user_id: str, tags: List[str] = [], properties: Dict[str, Any] = {}):
+        return await self.api_service.get_user_token_async(user_id, tags=tags, properties=properties)
