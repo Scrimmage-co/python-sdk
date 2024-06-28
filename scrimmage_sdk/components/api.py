@@ -26,8 +26,8 @@ class APIService(BaseService):
             'Scrimmage-Namespace': namespace
         }
         payload = {
-            "eventId": f"py_{event_id}",
-            "userId": f"py_{user_id}",
+            "eventId": event_id,
+            "userId": user_id,
             "dataType": data_type,
             "body": rewardable
         }
