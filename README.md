@@ -163,7 +163,7 @@ SCRIMMAGE_NAMESPACE=YOUR_SCRIMMAGE_NAMESPACE
 2. Install dependencies
 ```
 pip install -r requirements.txt
-pip install pytest
+pip install pytest pytest-asyncio
 ```
 
 2. Start your development - you can add tests in the tests folder
