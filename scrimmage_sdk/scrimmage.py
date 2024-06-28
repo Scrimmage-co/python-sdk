@@ -27,6 +27,18 @@ class Scrimmage:
                         logger: Optional[ILogger] = default_logger,
                         secure: Optional[bool] = True,
                         validate_api_server_endpoint: Optional[bool] = True):
+        """
+        Creates a new Scrimmage instance with the given parameters.
+
+        Parameters:
+        - api_server_endpoint (str): The endpoint for the Scrimmage API server.
+        - namespace (str): The namespace for the Scrimmage instance. E.g. 'staging' or 'production'.
+        - private_key (str): Your Scrimmage private API key.
+        - log_level (Optional[LogLevel]): The log level for the logger. Defaults to 'info'.
+        - logger (Optional[ILogger]): The logger to use. Defaults to the default logger.
+        - secure (Optional[bool]): Whether to use secure connections. Defaults to True.
+        - validate_api_server_endpoint (Optional[bool]): Whether to validate the API server endpoint. Defaults to True.
+        """
         # Create config
         config = RewarderConfig(
             api_server_endpoint=api_server_endpoint,
@@ -48,6 +60,18 @@ class Scrimmage:
                       logger: Optional[ILogger] = default_logger,
                       secure: Optional[bool] = True,
                       validate_api_server_endpoint: Optional[bool] = True):
+        """
+        Initializes the Scrimmage instance with the given parameters.
+
+        Parameters:
+        - api_server_endpoint (str): The endpoint for the Scrimmage API server.
+        - namespace (str): The namespace for the Scrimmage instance. E.g. 'staging' or 'production'.
+        - private_key (str): Your Scrimmage private API key.
+        - log_level (Optional[LogLevel]): The log level for the logger. Defaults to 'info'.
+        - logger (Optional[ILogger]): The logger to use. Defaults to the default logger.
+        - secure (Optional[bool]): Whether to use secure connections. Defaults to True.
+        - validate_api_server_endpoint (Optional[bool]): Whether to validate the API server endpoint. Defaults to True.
+        """
         # Create config
         config = RewarderConfig(
             api_server_endpoint=api_server_endpoint,

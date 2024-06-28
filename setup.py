@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="scrimmage-rewards",
-    version="0.1.0",
+    name="scrimmage-sdk",
+    version="1.0.3",
     description="Simple rewards for your app or website",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -13,6 +13,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         "dependency-injector",
+        "httpx",
+        "pydantic",
     ],
     keywords=[
         "scrimmage",

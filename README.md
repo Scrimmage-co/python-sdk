@@ -11,16 +11,16 @@ Tutorial can be found at [Scrimmage Rewards Tutorial](https://scrimmage-rewards.
 
 ### Install
     pip install scrimmage-sdk
-(This PyPi package is not currently available, but will be available soon)
 
 ### Configuration
 ```python
 from scrimmage_sdk import Scrimmage
 
+# Configure Scrimmage:
 Scrimmage.init_rewarder(
-    api_server_endpoint="YOUR_SCRIMMAGE_API_SERVER_ENDPOINT",
-    private_key="YOUR_SCRIMMAGE_PRIVATE_KEY",
-    namespace="YOUR_SCRIMMAGE_NAMESPACE",
+    api_server_endpoint="YOUR_SCRIMMAGE_API_SERVER_ENDPOINT", # your api server endpoint
+    private_key="YOUR_SCRIMMAGE_PRIVATE_KEY", # your private key
+    namespace="YOUR_SCRIMMAGE_NAMESPACE", # environment, e.g. staging or production
 )
 ```
 
@@ -71,9 +71,9 @@ response = Scrimmage.reward.track_rewardable_once(user_id, data_type, idempotenc
 ```python
 from scrimmage_sdk import Scrimmage
 
-# Configure Scrimmage...
-
 # Using multiple Scrimmage instances at once
+
+# Instance 1
 scrimmage1 = Scrimmage.create_rewarder(
     api_server_endpoint=os.getenv('SCRIMMAGE_API_SERVER_ENDPOINT_1'),
     private_key=os.getenv('SCRIMMAGE_PRIVATE_KEY_1'),
@@ -82,6 +82,8 @@ scrimmage1 = Scrimmage.create_rewarder(
 scrimmage1.user.get_user_token(...)
 scrimmage1.reward.track_rewardable(...)
 
+
+# Instance 2
 scrimmage2 = Scrimmage.create_rewarder(
     api_server_endpoint=os.getenv('SCRIMMAGE_API_SERVER_ENDPOINT_2'),
     private_key=os.getenv('SCRIMMAGE_PRIVATE_KEY_2'),
@@ -161,6 +163,7 @@ SCRIMMAGE_NAMESPACE=YOUR_SCRIMMAGE_NAMESPACE
 2. Install dependencies
 ```
 pip install -r requirements.txt
+pip install pytest
 ```
 
 2. Start your development - you can add tests in the tests folder
@@ -172,7 +175,7 @@ pytest
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/scrimmage-rewards.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Scrimmage-co/python-sdk.
 
 ## License
 

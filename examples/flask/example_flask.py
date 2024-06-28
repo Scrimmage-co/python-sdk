@@ -1,10 +1,7 @@
 from flask import Flask, jsonify, request
 from scrimmage_sdk import Scrimmage
-from dotenv import load_dotenv
 import os
 
-# Load environment variables
-load_dotenv()
 
 app = Flask(__name__)
 

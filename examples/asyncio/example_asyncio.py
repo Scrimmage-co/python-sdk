@@ -1,11 +1,6 @@
 import asyncio
 from scrimmage_sdk import Scrimmage
-from dotenv import load_dotenv
 import os
-
-
-# Load environment variables
-load_dotenv()
 
 
 # Initialize Scrimmage

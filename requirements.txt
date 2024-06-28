@@ -1,0 +1,6 @@
+dependency-injector
+httpx
+pydantic
+
+# for testing:
+# pytest

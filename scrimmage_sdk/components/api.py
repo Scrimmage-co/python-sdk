@@ -10,7 +10,7 @@ class APIService(BaseService):
     def __init__(self, config_service: ConfigService):
         self.config_service = config_service
 
-    def _prepare_request_create_integration_reward(self, user_id: str, data_type: str, event_id_or_reward: Union[str, Any], reward: Any = None):
+    def _prepare_request_create_integration_reward(self, user_id: str, data_type: str, event_id_or_reward: Union[str, Union[Dict[str, Any], None]], reward: Union[Dict[str, Any], None] = None):
         private_key = self.config_service.get_private_key_or_throw()
         namespace = self.config_service.get_namespace_or_throw()
 
@@ -33,11 +33,11 @@ class APIService(BaseService):
         }
         return url, payload, headers
 
-    def create_integration_reward(self, user_id: str, data_type: str, event_id_or_reward: Union[str, Any], reward: Any = None):
+    def create_integration_reward(self, user_id: str, data_type: str, event_id_or_reward: Union[str, Union[Dict[str, Any], None]], reward: Union[Dict[str, Any], None] = None):
         url, payload, headers = self._prepare_request_create_integration_reward(user_id, data_type, event_id_or_reward, reward)
         return self._post_sync(url, payload, headers)
     
-    async def create_integration_reward_async(self, user_id: str, data_type: str, event_id_or_reward: Union[str, Any], reward: Any = None):
+    async def create_integration_reward_async(self, user_id: str, data_type: str, event_id_or_reward: Union[str, Union[Dict[str, Any], None]], reward: Union[Dict[str, Any], None] = None):
         url, payload, headers = self._prepare_request_create_integration_reward(user_id, data_type, event_id_or_reward, reward)
         return await self._post_async(url, payload, headers)
 
